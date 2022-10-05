@@ -1,0 +1,24 @@
+name: mcrcon-nsg
+base: core20
+adopt-info: detect-version
+summary: mcrcon is console based rcon client for remote administration and scripts
+description: |
+  This is an unofficial snap that snaps together the mcrcon tool that uses the
+  RCON protocol for Minecraft server administration. For official binary builds,
+  and other packaging formats see https://github.com/Tiiffi/mcrcon/
+
+grade: stable
+confinement: strict
+
+parts:
+  detect-version:
+    plugin: nil
+    override-build: |
+      apt -y install jq curl
+      VERSION=$(curl --silent "https://api.github.com/repos/Tiiffi/mcrcon/releases/latest" | jq -r .tag_name)
+      snapcraftctl set-version $VERSION
+
+  mcrcon:
+    plugin: make
+    source: https://github.com/Tiiffi/mcrcon.git
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
