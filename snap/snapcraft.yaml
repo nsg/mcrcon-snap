@@ -11,7 +11,7 @@ grade: stable
 confinement: strict
 
 apps:
-  mcrcon:
+  mcrcon-nsg:
     command: usr/local/bin/mcrcon
     plugs:
       - network
