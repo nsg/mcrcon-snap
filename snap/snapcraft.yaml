@@ -10,6 +10,12 @@ description: |
 grade: stable
 confinement: strict
 
+apps:
+  mcrcon:
+    command: usr/local/bin/mcrcon
+    plugs:
+      - network
+
 parts:
   detect-version:
     plugin: nil
